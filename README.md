@@ -162,7 +162,7 @@
     }
     ```
     - 返回changeSet数据格式
-- 启用禁用 `POST am/flows/state?methodOverride=PUT&sync_token=1564218587.82764`
+- 启用禁用 `POST /am/flows/state?methodOverride=PUT&sync_token=1564218587.82764`
     - 传入body
     ```JSON
     {
