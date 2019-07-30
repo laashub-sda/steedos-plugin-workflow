@@ -144,23 +144,42 @@ export async function checkBeforeFlow(spaceId, formId) {
     }
 }
 
-export async function getFlow(flowId){
-    let flow = await steedosSchema.getObject('flows').findOne(flowId); 
-    if (!flow){
+export async function getFlow(flowId) {
+    let flow = await steedosSchema.getObject('flows').findOne(flowId);
+    if (!flow) {
         throw new Error('流程不存在')
     }
     return flow;
 }
 
-export async function getSpaceUser(userId, spaceId){
-    let spaceUser = await steedosSchema.getObject('space_users').find({filters: `(space eq '${spaceId}') and (user eq '${userId}')`}); 
-    if (!spaceUser){
+export async function getForm(formId) {
+    let form = await steedosSchema.getObject('forms').findOne(formId);
+    if (!form) {
+        throw new Error('表单不存在')
+    }
+    return form;
+}
+
+export async function getSpaceUser(userId, spaceId) {
+    let spaceUser = await steedosSchema.getObject('space_users').find({ filters: `(space eq '${spaceId}') and (user eq '${userId}')` });
+    if (!spaceUser) {
         throw new Error('用户不属于当前工作区')
     }
-    if (!spaceUser.user_accepted){
+    if (!spaceUser.user_accepted) {
         throw new Error('用户在当前工作区是停用状态')
     }
     return spaceUser;
+}
+
+export async function isSpaceAdmin(spaceId, userId) {
+    let space = await steedosSchema.getObject('spaces').findOne(spaceId);
+    if (!space) {
+        throw new Error('未找到工作区');
+    }
+
+    if (!space.admins.includes(userId)) {
+        throw new Error('用户不是工作区管理员');
+    }
 }
 
 
