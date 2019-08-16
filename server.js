@@ -1,5 +1,4 @@
 const server = require('@steedos/meteor-bundle-runner');
-const objectql = require("@steedos/objectql");
 const express = require('express');
 const designerRouter = require('./lib/designerRouter').designerRouter;
 const path = require('path');
