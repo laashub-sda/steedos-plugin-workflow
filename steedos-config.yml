@@ -1,10 +1,12 @@
 env:
-  PORT: 6000
-  ROOT_URL: http://127.0.0.1:6000
+  PORT: 80
+  ROOT_URL: http://192.168.2.240:80
 datasources:
   default:
     connection:
       url: mongodb://127.0.0.1/qhd-beta
+    objectFiles:
+     - ./objects/**
 public:
   cfs:
     store: "local"
