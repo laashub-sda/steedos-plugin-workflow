@@ -1,0 +1,14 @@
+name: cfs_instances_filerecord
+table_name: 'cfs.instances.filerecord'
+fields:
+  original:
+    type: object
+    omit: true
+  metadata:
+    type: object
+    omit: true
+  uploadedAt: 
+    type: datetime
+  copies:
+    type: object
+    omit: true

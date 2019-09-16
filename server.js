@@ -1,24 +1,19 @@
 const server = require('@steedos/meteor-bundle-runner');
 const express = require('express');
-const designerRouter = require('./lib/designerRouter').designerRouter;
-const path = require('path');
 const steedos = require('@steedos/core');
-
+const app = express();
+const init = require('./index').init
 server.Fiber(function () {
-    server.Profile.run("Server startup", function () {
-        server.loadServerBundles();
-        steedos.init();
-        try {
-            let app = express();
-            app
-            .use('/', designerRouter)
-            .use('/applications', express.static(path.join(__dirname, 'public')));
-            console.log('public path: ', path.join(__dirname, 'public'));
+    try {
+        server.Profile.run("Server startup", function () {
+            server.loadServerBundles();
+            steedos.init();
+            init({app})
             WebApp.connectHandlers.use(app);
-        } catch (error) {
-            console.log(error)
-        }
-        server.callStartupHooks();
-        server.runMain();
-    });
-}).run();
+            server.callStartupHooks();
+            server.runMain();
+        })
+    } catch (error) {
+       console.error(error.stack)
+    }
+}).run()
