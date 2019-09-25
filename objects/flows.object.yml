@@ -9,7 +9,19 @@ actions:
     'on': list
     todo: !<tag:yaml.org,2002:js/function> |-
       function (object_name, record_id, fields) {
-              return WorkflowCore.openFlowDesign(Steedos.locale().toLocaleLowerCase(), Steedos.spaceId(), null, Creator.getUserCompanyId());
+              var url;
+              var locale = Steedos.locale().toLocaleLowerCase();
+              var space = Steedos.spaceId();
+              var flow = record_id;
+              var companyId = Creator.getUserCompanyId();
+              url = `/applications/designer/current/${locale}/?spaceId=${space}`;
+              if (flow) {
+                url = url + `&flowId=${flow}`;
+              }
+              if (companyId && !Creator.isSpaceAdmin(space, Meteor.userId())) {
+                url = url + `&companyId=${companyId}`;
+              }
+              return Steedos.openWindow(Steedos.absoluteUrl(url));
             }
   designFlow:
     label: 流程设计器
@@ -20,5 +32,17 @@ actions:
     'on': record
     todo: !<tag:yaml.org,2002:js/function> |-
       function (object_name, record_id, fields) {
-              return WorkflowCore.openFlowDesign(Steedos.locale().toLocaleLowerCase(), Steedos.spaceId(), record_id, Creator.getUserCompanyId());
+              var url;
+              var locale = Steedos.locale().toLocaleLowerCase();
+              var space = Steedos.spaceId();
+              var flow = record_id;
+              var companyId = Creator.getUserCompanyId();
+              url = `/applications/designer/current/${locale}/?spaceId=${space}`;
+              if (flow) {
+                url = url + `&flowId=${flow}`;
+              }
+              if (companyId && !Creator.isSpaceAdmin(space, Meteor.userId())) {
+                url = url + `&companyId=${companyId}`;
+              }
+              return Steedos.openWindow(Steedos.absoluteUrl(url));
             }

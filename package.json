@@ -1,6 +1,6 @@
 {
   "name": "@steedos/steedos-plugin-workflow",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "main": "index.js",
   "repository": "https://github.com/steedos/steedos-plugin-workflow.git",
   "author": "sunhaolin <sunhaolin@hotoa.com>",
