@@ -3,3 +3,4 @@ node_modules
 yarn.lock
 steedos-config.yml
 .migrate
+.DS_Store
